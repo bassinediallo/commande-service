@@ -1,0 +1,40 @@
+spring:
+  application:
+    name: commande-service
+  datasource:
+    url: jdbc:mysql://mysql:3306/commande_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  data:
+    redis:
+      host: redis
+      port: 6379
+    repositories:
+      enabled: false
+  cache:
+    type: redis
+  kafka:
+    bootstrap-servers: kafka:9092
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+server:
+  port: 8083
+app:
+  jwt:
+    secret: commande-service-groupeisi-secret-key-tres-longue-et-securisee-2024
+    expiration: 86400000
+produit:
+  service:
+    url: http://produit-service-app:8082
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
